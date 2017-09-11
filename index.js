@@ -1,5 +1,7 @@
 const http = require('http')
 const readline = require('readline');
+const nodemailer = require('nodemailer');
+const _ = require('lodash');
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -27,11 +29,51 @@ function executeSearch(keywords) {
 
         // The whole response has been received. Print out the result.
         res.on('end', () => {
-            items = JSON.parse(data).findItemsByKeywordsResponse[0].searchResult;
-            console.log(items)
+            items = _.map(JSON.parse(data).findItemsByKeywordsResponse[0].searchResult[0].item, (item) => {
+                let itemText = 'Item name: ' +
+                    item.title + '\n' +
+                    'Current price: ' + item.sellingStatus[0].currentPrice[0]['@currencyId'] + ' ' + item.sellingStatus[0].currentPrice[0].__value__ + '\n' +
+                    'Item URL: ' + item.viewItemURL + '\n' +
+                    'Location: ' + item.location;
+
+                return itemText;
+
+            });
+
+            sendAlert(items);
         });
 
     }).on("error", (err) => {
         console.log("Error: " + err.message);
+    });
+}
+
+function sendAlert(items) {
+    const transport = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: process.env.EBAYALERTSEMAIL,
+            pass: process.env.EBAYALERTSPW,
+        },
+    });
+
+    let msg = '';
+
+    items.forEach((item) => {
+        msg += item + '\n\n';
+    });
+
+    const mailOptions = {
+        from: process.env.EBAYALERTSEMAIL,
+        to: process.env.EBAYALERTSDEST,
+        subject: 'ebay Alert',
+        text: msg
+    };
+
+    transport.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+        }
+        console.log(`Message sent: ${info.response}`);
     });
 }
