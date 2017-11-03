@@ -14,7 +14,7 @@ pool.connect();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(express.static('public'))
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html')
