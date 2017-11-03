@@ -1,0 +1,33 @@
+{
+  "name": "ebay-alerts",
+  "version": "1.0.0",
+  "description": "Save eBay searches and receive email alerts when your search has results.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuckermiller/ebay-alerts.git"
+  },
+  "keywords": [
+    "ebay",
+    "alerts"
+  ],
+  "author": "tuckermiller",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tuckermiller/ebay-alerts/issues"
+  },
+  "homepage": "https://github.com/tuckermiller/ebay-alerts#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "connect-redis": "^3.3.2",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "lodash": "^4.17.4",
+    "nodemailer": "^4.1.0",
+    "pg": "^7.3.0"
+  }
+}
