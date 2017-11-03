@@ -16,15 +16,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/index.html')
+    res.sendFile(__dirname + '/public/index.html')
 })
 
 app.get('/register', function(req, res) {
-    res.sendFile(__dirname + '/register.html')
+    res.sendFile(__dirname + '/public/register.html')
 })
 
 app.get('/dashboard', function(req, res) {
-    res.sendFile(__dirname + '/dashboard.html')
+    res.sendFile(__dirname + '/public/dashboard.html')
 })
 
 app.post('/createuser', function(req, res) {
