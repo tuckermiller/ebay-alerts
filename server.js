@@ -12,6 +12,11 @@ const pool = new Pool({
 
 pool.connect();
 
+var path = require('path')
+
+process.env.PWD = process.cwd();
+app.use(express.static(path.join(process.env.PWD, 'public')));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
