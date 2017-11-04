@@ -32,7 +32,7 @@ app.get('/dashboard', function(req, res) {
     res.sendFile(__dirname + '/public/dashboard.html')
 })
 
-app.post('/createuser', function(req, res) {
+app.post('/create_user', function(req, res) {
     let hashedPassword = bcrypt.hashSync(req.body.password, 10);
     const values = [req.body.email, hashedPassword]
     pool.query('INSERT INTO users (email, password) VALUES($1, $2) RETURNING *', values, (err, psqlRes) => {
