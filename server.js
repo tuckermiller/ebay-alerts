@@ -28,7 +28,7 @@ app.get('/dashboard', function(req, res) {
 })
 
 app.post('/createuser', function(req, res) {
-    let hashedPassword = bcrypt.hashSync(req.body.pw, 10);
+    let hashedPassword = bcrypt.hashSync(req.body.password, 10);
     const values = [req.body.email, hashedPassword]
     pool.query('INSERT INTO users (email, password) VALUES($1, $2) RETURNING *', values, (err, psqlRes) => {
         if (err) {
