@@ -12,7 +12,6 @@ const pool = new Pool({
 
 pool.connect();
 
-app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
