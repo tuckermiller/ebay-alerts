@@ -23,9 +23,9 @@ pool.query('SELECT * FROM alerts', (err, psqlRes) => {
                 pool.query('SELECT email FROM users WHERE user_id = $1', [row.user_id], (err, psqlRes) => {
                     console.log(psqlRes);
                     email = psqlRes;
+                    // To do: only send alerts according to their frequency
+                    // sendAlert(getEbayItemsByKeyword(row.keywords), email);
                 });
-                // To do: only send alerts according to their frequency
-                sendAlert(getEbayItemsByKeyword(row.keywords), email);
             });
         }
     }
@@ -67,8 +67,8 @@ function getEbayItemsByKeyword(keywords) {
 }
 
 function sendAlert(items, email) {
-    console.log(items);
-    console.log(email);
+    // console.log(items);
+    // console.log(email);
     const transport = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
