@@ -70,7 +70,7 @@ app.post('/login', function(req, res) {
         } else {
             console.log(psqlRes.rows[0]);
             if (bcrypt.compareSync(req.query.pw, psqlRes.rows[0].password.trim())) {
-                req.session.userId = psqlRes.rows[0].user_id;
+                // req.session.userId = psqlRes.rows[0].user_id;
             } else {
                 res.send(401);
             }
