@@ -2,7 +2,7 @@ $("#login-form").on("submit", function(event) {
     event.preventDefault();
 
     var data = {};
-    $("#registration-form").serializeArray().map(function(x) { data[x.name] = x.value; });
+    $("#login-form").serializeArray().map(function(x) { data[x.name] = x.value; });
     $.ajax(({
         type: "POST",
         url: "/login",
