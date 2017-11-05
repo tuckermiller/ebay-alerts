@@ -67,15 +67,15 @@ app.post('/login', function(req, res) {
     console.log(req.body);
     pool.query('SELECT * FROM users WHERE email = ($1)', values, (err, psqlRes) => {
         if (err) {
+            console.log('error');
             res.sendFile(__dirname + '/error.html')
         } else {
             console.log(psqlRes.rows[0]);
-            res.redirect('/');
-            // if (bcrypt.compareSync(req.query.pw, psqlRes.rows[0].password.trim())) {
-            //     req.session.userId = psqlRes.rows[0].user_id;
-            // } else {
-            //     res.send(401);
-            // }
+            if (bcrypt.compareSync(req.query.pw, psqlRes.rows[0].password.trim())) {
+                req.session.userId = psqlRes.rows[0].user_id;
+            } else {
+                res.send(401);
+            }
         }
     });
 })
