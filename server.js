@@ -73,9 +73,9 @@ app.post('/create_user', function(req, res) {
     pool.query('INSERT INTO users (email, password) VALUES($1, $2) RETURNING *', values, (err, psqlRes) => {
         if (err) {
             console.log(err);
-            res.sendFile(__dirname + '/error.html')
+            res.send(500)
         } else {
-            res.sendFile(__dirname + '/success.html');
+            res.send(200);
         }
     });
 })
