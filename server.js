@@ -33,9 +33,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 app.get('/', function(req, res) {
+    console.log(req.session);
     if (req.session.userId) {
-        console.log(req.session.userId);
-        res.redirect('/dashboard');
+        res.sendFile(__dirname + '/public/dashboard.html');
     } else {
         res.sendFile(__dirname + '/public/index.html')
     }
@@ -46,7 +46,6 @@ app.get('/register', function(req, res) {
 })
 
 app.get('/dashboard', function(req, res) {
-    console.log(req.session.userId);
     res.sendFile(__dirname + '/public/dashboard.html')
 })
 
