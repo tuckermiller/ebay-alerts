@@ -33,7 +33,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 app.get('/', function(req, res) {
-    if (req.session.key) {
+    if (req.session.userId) {
+        console.log(req.session.userId);
         res.redirect('/dashboard');
     } else {
         res.sendFile(__dirname + '/public/index.html')
@@ -67,11 +68,10 @@ app.post('/login', function(req, res) {
     console.log(req.body);
     pool.query('SELECT * FROM users WHERE email = ($1)', values, (err, psqlRes) => {
         if (err) {
-            console.log('error');
+            // To do: replace with error message under form
             res.sendFile(__dirname + '/error.html')
         } else {
-            console.log(psqlRes.rows[0]);
-            if (bcrypt.compareSync(req.query.pw, psqlRes.rows[0].password.trim())) {
+            if (bcrypt.compareSync(req.query.password, psqlRes.rows[0].password.trim())) {
                 req.session.userId = psqlRes.rows[0].user_id;
                 res.redirect('/');
             } else {
