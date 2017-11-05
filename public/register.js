@@ -9,7 +9,9 @@ $("#registration-form").on("submit", function(event) {
         data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function(data) { alert(data); },
+        success: function(data) {
+            window.location.href('/');
+        },
         failure: function(errMsg) {
             alert(errMsg);
         }

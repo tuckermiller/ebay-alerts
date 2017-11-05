@@ -50,6 +50,22 @@ app.get('/dashboard', function(req, res) {
     res.sendFile(__dirname + '/public/dashboard.html')
 })
 
+app.get('/alerts', function(req, res) {
+    const values = [req.session.userId];
+    pool.query('SELECT * FROM users WHERE user_id = ($1)', values, (err, psqlRes) => {
+        if (err) {
+            // To do: replace with error message under form
+            res.sendFile(__dirname + '/error.html')
+        } else {
+            if (!psqlRes.rows) {
+                res.send('User not found')
+            } else {
+                res.send(psqlRes.rows[0]);
+            }
+        }
+    });
+});
+
 app.post('/create_user', function(req, res) {
     let hashedPassword = bcrypt.hashSync(req.body.password, 10);
     const values = [req.body.email, hashedPassword]
@@ -76,7 +92,7 @@ app.post('/login', function(req, res) {
             } else {
                 if (bcrypt.compareSync(req.body.password, psqlRes.rows[0].password.trim())) {
                     req.session.userId = psqlRes.rows[0].user_id;
-                    res.redirect('/dashboard');
+                    res.send(200);
                 } else {
                     res.send(401);
                 }
@@ -90,7 +106,7 @@ app.get('/logout', function(req, res) {
         if (err) {
             console.log(err);
         } else {
-            res.redirect('/');
+            res.send(200);
         }
     });
 });
