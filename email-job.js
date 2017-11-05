@@ -58,6 +58,8 @@ function getEbayItemsByKeyword(keywords) {
 }
 
 function sendAlert(items, email) {
+    console.log(items);
+    console.log(email);
     const transport = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
