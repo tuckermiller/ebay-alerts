@@ -33,8 +33,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 app.get('/', function(req, res) {
-    console.log(req.session);
-
     if (req.session.userId) {
         console.log(req.session.userId);
         res.redirect('/dashboard');
@@ -78,8 +76,7 @@ app.post('/login', function(req, res) {
             } else {
                 if (bcrypt.compareSync(req.body.password, psqlRes.rows[0].password.trim())) {
                     req.session.userId = psqlRes.rows[0].user_id;
-                    console.log(req.session);
-                    res.redirect('/');
+                    res.redirect('/dashboard');
                 } else {
                     res.send(401);
                 }
