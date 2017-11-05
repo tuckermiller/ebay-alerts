@@ -17,7 +17,7 @@ $(document).ready(function() {
         event.preventDefault();
 
         var data = {};
-        $("#registration-form").serializeArray().map(function(x) { data[x.name] = x.value; });
+        $("#create-alert-form").serializeArray().map(function(x) { data[x.name] = x.value; });
         $.ajax(({
             type: "POST",
             url: "/create_alert",
