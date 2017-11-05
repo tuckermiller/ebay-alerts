@@ -52,7 +52,7 @@ app.get('/dashboard', function(req, res) {
 
 app.get('/alerts', function(req, res) {
     const values = [req.session.userId];
-    pool.query('SELECT * FROM users WHERE user_id = ($1)', values, (err, psqlRes) => {
+    pool.query('SELECT * FROM alerts WHERE user_id = ($1)', values, (err, psqlRes) => {
         if (err) {
             // To do: replace with error message under form
             res.sendFile(__dirname + '/error.html')
@@ -60,7 +60,7 @@ app.get('/alerts', function(req, res) {
             if (!psqlRes.rows) {
                 res.send('User not found')
             } else {
-                res.send(psqlRes.rows[0]);
+                res.send(psqlRes.rows);
             }
         }
     });
@@ -78,6 +78,19 @@ app.post('/create_user', function(req, res) {
         }
     });
 })
+
+app.post('/create_alert', function(req, res) {
+    const values = [req.session.userId, req.body.keywords, req.body.frequency]
+    pool.query('INSERT INTO alert (user_id, keywords, frequency) VALUES($1, $2, $3) RETURNING *', values, (err, psqlRes) => {
+        if (err) {
+            console.log(err);
+            res.sendFile(__dirname + '/error.html')
+        } else {
+            res.send(200);
+        }
+    });
+})
+
 
 app.post('/login', function(req, res) {
     const values = [req.body.email];

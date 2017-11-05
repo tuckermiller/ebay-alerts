@@ -11,6 +11,28 @@
     <span>Alerts Dashboard</span>
     <div id="user-title"></div>
     <div class="section">
+        <span class="section-title">Create alert</span>
+        <form id="create-alert-form">
+            <div>
+                <label for="keywords">Keywords:</label>
+                <input type="text" name="keywords">
+            </div>
+            <div>
+                <label for="frequency">Frequency:</label>
+                <select name="frequency">
+                    <option value="1 week">1 week</option>
+                    <option value="3 days">3 days</option>
+                    <option value="1 day">1 day</option>
+                    <option value="6 hours">6 hours</option>
+                    <option value="3 hours">3 hours</option> 
+                  </select>
+            </div>
+            <div>
+                <button type="submit">Go</button>
+            </div>
+        </form>
+    </div>
+    <div class="section">
         <span class="section-title">
             My alerts
         </span>
