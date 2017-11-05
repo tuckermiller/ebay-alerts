@@ -19,7 +19,7 @@ pool.query('SELECT * FROM alerts', (err, psqlRes) => {
                 console.log(row.keywords);
 
                 let email;
-                pool.query('SELECT email FROM users WHERE user_id = $1', row.user_id, (err, psqlRes) => {
+                pool.query('SELECT email FROM users WHERE user_id = $1', [row.user_id], (err, psqlRes) => {
                     console.log(psqlRes);
                     email = psqlRes;
                 });
