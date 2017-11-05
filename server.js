@@ -71,7 +71,7 @@ app.post('/login', function(req, res) {
             // To do: replace with error message under form
             res.sendFile(__dirname + '/error.html')
         } else {
-            if (bcrypt.compareSync(req.query.password, psqlRes.rows[0].password.trim())) {
+            if (bcrypt.compareSync(req.body.password, psqlRes.rows[0].password.trim())) {
                 req.session.userId = psqlRes.rows[0].user_id;
                 res.redirect('/');
             } else {
