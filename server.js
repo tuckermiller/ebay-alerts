@@ -68,7 +68,9 @@ app.get('/alerts', function(req, res) {
 
 app.post('/create_user', function(req, res) {
     let hashedPassword = bcrypt.hashSync(req.body.password, 10);
-    const values = [req.body.email, hashedPassword]
+    const values = [req.body.email, hashedPassword];
+    // To do: validate email
+
     pool.query('INSERT INTO users (email, password) VALUES($1, $2) RETURNING *', values, (err, psqlRes) => {
         if (err) {
             console.log(err);
@@ -81,10 +83,10 @@ app.post('/create_user', function(req, res) {
 
 app.post('/create_alert', function(req, res) {
     const values = [req.session.userId, req.body.keywords, req.body.frequency]
-    pool.query('INSERT INTO alert (user_id, keywords, frequency) VALUES($1, $2, $3) RETURNING *', values, (err, psqlRes) => {
+    pool.query('INSERT INTO alerts (user_id, keywords, frequency) VALUES($1, $2, $3) RETURNING *', values, (err, psqlRes) => {
         if (err) {
             console.log(err);
-            res.sendFile(__dirname + '/error.html')
+            res.send(500)
         } else {
             res.send(200);
         }
