@@ -65,19 +65,19 @@ app.post('/create_user', function(req, res) {
 app.post('/login', function(req, res) {
     const values = [req.body.email];
     console.log(req.body);
-    pool.query('SELECT * FROM users WHERE email = ($1)', values, (err, psqlRes) => {
-        if (err) {
-            console.log('error');
-            res.sendFile(__dirname + '/error.html')
-        } else {
-            console.log(psqlRes.rows[0]);
-            if (bcrypt.compareSync(req.query.pw, psqlRes.rows[0].password.trim())) {
-                req.session.userId = psqlRes.rows[0].user_id;
-            } else {
-                res.send(401);
-            }
-        }
-    });
+    // pool.query('SELECT * FROM users WHERE email = ($1)', values, (err, psqlRes) => {
+    //     if (err) {
+    //         console.log('error');
+    //         res.sendFile(__dirname + '/error.html')
+    //     } else {
+    //         console.log(psqlRes.rows[0]);
+    //         if (bcrypt.compareSync(req.query.pw, psqlRes.rows[0].password.trim())) {
+    //             req.session.userId = psqlRes.rows[0].user_id;
+    //         } else {
+    //             res.send(401);
+    //         }
+    //     }
+    // });
 })
 
 app.get('/logout', function(req, res) {
