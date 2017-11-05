@@ -17,6 +17,7 @@ pool.query('SELECT * FROM alerts', (err, psqlRes) => {
             _.forEach(psqlRes.rows, (row) => {
                 console.log(row);
                 console.log(row.keywords);
+                console.log(row.user_id);
 
                 let email;
                 pool.query('SELECT email FROM users WHERE user_id = $1', [row.user_id], (err, psqlRes) => {
