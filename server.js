@@ -73,12 +73,16 @@ app.post('/login', function(req, res) {
             // To do: replace with error message under form
             res.sendFile(__dirname + '/error.html')
         } else {
-            if (bcrypt.compareSync(req.body.password, psqlRes.rows[0].password.trim())) {
-                req.session.userId = psqlRes.rows[0].user_id;
-                console.log(req.session);
-                res.redirect('/');
+            if (!psqlRes.rows) {
+                res.send('User not found')
             } else {
-                res.send(401);
+                if (bcrypt.compareSync(req.body.password, psqlRes.rows[0].password.trim())) {
+                    req.session.userId = psqlRes.rows[0].user_id;
+                    console.log(req.session);
+                    res.redirect('/');
+                } else {
+                    res.send(401);
+                }
             }
         }
     });
