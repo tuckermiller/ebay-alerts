@@ -81,7 +81,6 @@ app.post('/create_user', function(req, res) {
 
 app.post('/login', function(req, res) {
     const values = [req.body.email];
-    console.log(req.body);
     pool.query('SELECT * FROM users WHERE email = ($1)', values, (err, psqlRes) => {
         if (err) {
             // To do: replace with error message under form

@@ -8,7 +8,6 @@ $("#login-form").on("submit", function(event) {
         url: "/login",
         data: JSON.stringify(data),
         contentType: "application/json; charset=utf-8",
-        dataType: "json",
         success: function(data) {
             window.location.href = "/dashboard"
         },
