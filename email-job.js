@@ -16,7 +16,8 @@ pool.query('SELECT * FROM alerts', (err, psqlRes) => {
             _.forEach(psqlRes.rows, (row) => {
                 pool.query('SELECT email FROM users WHERE user_id = $1', [row.user_id], (err, psqlRes) => {
                     // To do: only send alerts according to their frequency
-                    sendAlert(getEbayItemsByKeyword(row.keywords), psqlRes.rows[0].email);
+                    console.log(getEbayItemsByKeyword(row.keywords));
+                    console.log(psqlRes.rows[0].email);
                 });
             });
         }
