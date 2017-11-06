@@ -16,14 +16,14 @@ pool.query('SELECT * FROM alerts', (err, psqlRes) => {
             _.forEach(psqlRes.rows, (row) => {
                 pool.query('SELECT email FROM users WHERE user_id = $1', [row.user_id], (err, psqlRes) => {
                     // To do: only send alerts according to their frequency
-                    console.log(getEbayItemsByKeyword(row.keywords));
+                    sendAlert(row.keywords, psqlRes.rows[0].email)
                 });
             });
         }
     }
 });
 
-function getEbayItemsByKeyword(keywords) {
+function sendAlert(keywords, email) {
     let url = 'http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=' + process.env.EBAY_APPID + '&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD';
     url += '&keywords=' + encodeURIComponent(keywords);
 
@@ -48,16 +48,15 @@ function getEbayItemsByKeyword(keywords) {
                 return itemText;
 
             });
+            mailAlert(items, email);
         });
 
     }).on("error", (err) => {
         console.log("Error: " + err.message);
     });
-
-    return items;
 }
 
-function sendAlert(items, email) {
+function mailAlert(items, email) {
     const transport = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
