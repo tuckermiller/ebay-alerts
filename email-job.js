@@ -39,18 +39,17 @@ function getEbayItemsByKeyword(keywords) {
 
         // The whole response has been received. Print out the result.
         res.on('end', () => {
-            console.log(JSON.parse(data));
-            // items = _.map(JSON.parse(data).findItemsByKeywordsResponse[0].searchResult[0].item, (item) => {
-            //     let itemText = 'Item name: ' +
-            //         item.title + '\n' +
-            //         'Current price: ' + item.sellingStatus[0].currentPrice[0]['@currencyId'] + ' ' + item.sellingStatus[0].currentPrice[0].__value__ + '\n' +
-            //         'Item URL: ' + item.viewItemURL + '\n' +
-            //         'Location: ' + item.location;
+            items = _.map(JSON.parse(data).findItemsByKeywordsResponse[0].searchResult[0].item, (item) => {
+                let itemText = 'Item name: ' +
+                    item.title + '\n' +
+                    'Current price: ' + item.sellingStatus[0].currentPrice[0]['@currencyId'] + ' ' + item.sellingStatus[0].currentPrice[0].__value__ + '\n' +
+                    'Item URL: ' + item.viewItemURL + '\n' +
+                    'Location: ' + item.location;
 
-            //     return itemText;
+                return itemText;
 
-            // });
-            // return items;
+            });
+            return items;
         });
 
     }).on("error", (err) => {
