@@ -41,7 +41,7 @@ function sendAlert(keywords, email) {
         res.on('end', () => {
             items = _.map(JSON.parse(data).findItemsByKeywordsResponse[0].searchResult[0].item, (item) => {
                 let itemText = 'Item name: ' +
-                    item.title + '\n' +
+                    item.title + '\n' + item.title + '\n' +
                     'Current price: ' + item.sellingStatus[0].currentPrice[0]['@currencyId'] + ' ' + item.sellingStatus[0].currentPrice[0].__value__ + '\n' +
                     'Item URL: ' + item.viewItemURL + '\n' +
                     'Location: ' + item.location;
@@ -72,7 +72,7 @@ function mailAlert(items, email) {
     });
 
     const mailOptions = {
-        from: process.env.EBAYALERTSEMAIL,
+        from: process.env.EMAIL_ADDRESS,
         to: email,
         subject: 'ebay Alert',
         text: msg
