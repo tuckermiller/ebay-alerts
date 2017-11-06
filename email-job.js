@@ -13,18 +13,10 @@ pool.query('SELECT * FROM alerts', (err, psqlRes) => {
         console.log(err);
     } else {
         if (psqlRes.rows) {
-            console.log(psqlRes.rows);
             _.forEach(psqlRes.rows, (row) => {
-                console.log(row);
-                console.log(row.keywords);
-                console.log(row.user_id);
-
-                let email;
                 pool.query('SELECT email FROM users WHERE user_id = $1', [row.user_id], (err, psqlRes) => {
-                    console.log(psqlRes);
-                    email = psqlRes;
                     // To do: only send alerts according to their frequency
-                    // sendAlert(getEbayItemsByKeyword(row.keywords), email);
+                    sendAlert(getEbayItemsByKeyword(row.keywords), psqlRes.rows[0].email);
                 });
             });
         }
@@ -58,7 +50,7 @@ function getEbayItemsByKeyword(keywords) {
 
             });
 
-            return (items);
+            return items;
         });
 
     }).on("error", (err) => {
@@ -67,8 +59,6 @@ function getEbayItemsByKeyword(keywords) {
 }
 
 function sendAlert(items, email) {
-    // console.log(items);
-    // console.log(email);
     const transport = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
