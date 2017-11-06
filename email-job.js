@@ -45,10 +45,11 @@ function getEbayItemsByKeyword(keywords) {
                     'Current price: ' + item.sellingStatus[0].currentPrice[0]['@currencyId'] + ' ' + item.sellingStatus[0].currentPrice[0].__value__ + '\n' +
                     'Item URL: ' + item.viewItemURL + '\n' +
                     'Location: ' + item.location;
-
+                console.log(item);
                 return itemText;
 
             });
+            console.log(items);
             return items;
         });
 
