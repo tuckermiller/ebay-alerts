@@ -17,7 +17,6 @@ pool.query('SELECT * FROM alerts', (err, psqlRes) => {
                 pool.query('SELECT email FROM users WHERE user_id = $1', [row.user_id], (err, psqlRes) => {
                     // To do: only send alerts according to their frequency
                     console.log(getEbayItemsByKeyword(row.keywords));
-                    console.log(psqlRes.rows[0].email);
                 });
             });
         }
@@ -25,7 +24,7 @@ pool.query('SELECT * FROM alerts', (err, psqlRes) => {
 });
 
 function getEbayItemsByKeyword(keywords) {
-    let url = 'http://svcs.sandbox.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=' + process.env.EBAY_APPID + '&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD';
+    let url = 'http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=' + process.env.EBAY_APPID + '&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD';
     url += '&keywords=' + encodeURIComponent(keywords);
 
     let items;
@@ -41,17 +40,17 @@ function getEbayItemsByKeyword(keywords) {
         // The whole response has been received. Print out the result.
         res.on('end', () => {
             console.log(JSON.parse(data));
-            items = _.map(JSON.parse(data).findItemsByKeywordsResponse[0].searchResult[0].item, (item) => {
-                let itemText = 'Item name: ' +
-                    item.title + '\n' +
-                    'Current price: ' + item.sellingStatus[0].currentPrice[0]['@currencyId'] + ' ' + item.sellingStatus[0].currentPrice[0].__value__ + '\n' +
-                    'Item URL: ' + item.viewItemURL + '\n' +
-                    'Location: ' + item.location;
+            // items = _.map(JSON.parse(data).findItemsByKeywordsResponse[0].searchResult[0].item, (item) => {
+            //     let itemText = 'Item name: ' +
+            //         item.title + '\n' +
+            //         'Current price: ' + item.sellingStatus[0].currentPrice[0]['@currencyId'] + ' ' + item.sellingStatus[0].currentPrice[0].__value__ + '\n' +
+            //         'Item URL: ' + item.viewItemURL + '\n' +
+            //         'Location: ' + item.location;
 
-                return itemText;
+            //     return itemText;
 
-            });
-            return items;
+            // });
+            // return items;
         });
 
     }).on("error", (err) => {
