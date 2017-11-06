@@ -27,7 +27,7 @@ function getEbayItemsByKeyword(keywords) {
     let url = 'http://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=' + process.env.EBAY_APPID + '&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD';
     url += '&keywords=' + encodeURIComponent(keywords);
 
-    let items;
+    let items = "";
 
     http.get(url, (res) => {
         let data = '';
@@ -45,17 +45,16 @@ function getEbayItemsByKeyword(keywords) {
                     'Current price: ' + item.sellingStatus[0].currentPrice[0]['@currencyId'] + ' ' + item.sellingStatus[0].currentPrice[0].__value__ + '\n' +
                     'Item URL: ' + item.viewItemURL + '\n' +
                     'Location: ' + item.location;
-                console.log(item);
                 return itemText;
 
             });
-            console.log(items);
-            return items;
         });
 
     }).on("error", (err) => {
         console.log("Error: " + err.message);
     });
+
+    return items;
 }
 
 function sendAlert(items, email) {
