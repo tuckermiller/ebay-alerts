@@ -29,6 +29,7 @@
     "lodash": "^4.17.4",
     "moment": "^2.19.1",
     "nodemailer": "^4.1.0",
+    "nodemailer-smtp-transport": "^2.7.4",
     "pg": "^7.3.0",
     "redis": "^2.8.0"
   }

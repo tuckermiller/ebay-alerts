@@ -1,5 +1,6 @@
 const http = require('http')
 const nodemailer = require('nodemailer');
+const smtpTransport = require('nodemailer-smtp-transport');
 const _ = require('lodash');
 const { Pool } = require('pg');
 
@@ -57,13 +58,13 @@ function sendAlert(keywords, email) {
 }
 
 function mailAlert(items, email) {
-    const transport = nodemailer.createTransport({
+    const transport = nodemailer.createTransport(smtpTransport({
         service: 'Gmail',
         auth: {
             user: process.env.EMAIL_ADDRESS,
             pass: process.env.EMAIL_PW,
         },
-    });
+    }));
 
     let msg = '';
 
