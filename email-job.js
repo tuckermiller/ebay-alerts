@@ -59,7 +59,7 @@ function sendAlert(keywords, email) {
 
 function mailAlert(items, email) {
     const transport = nodemailer.createTransport(smtpTransport({
-        service: 'Gmail',
+        service: 'gmail',
         auth: {
             user: process.env.EMAIL_ADDRESS,
             pass: process.env.EMAIL_PW,
