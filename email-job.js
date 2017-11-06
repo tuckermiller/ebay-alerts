@@ -49,7 +49,7 @@ function getEbayItemsByKeyword(keywords) {
                 return itemText;
 
             });
-
+            console.log(items);
             return items;
         });
 
