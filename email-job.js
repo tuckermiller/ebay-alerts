@@ -40,6 +40,7 @@ function getEbayItemsByKeyword(keywords) {
 
         // The whole response has been received. Print out the result.
         res.on('end', () => {
+            console.log(JSON.parse(data));
             items = _.map(JSON.parse(data).findItemsByKeywordsResponse[0].searchResult[0].item, (item) => {
                 let itemText = 'Item name: ' +
                     item.title + '\n' +
@@ -50,7 +51,6 @@ function getEbayItemsByKeyword(keywords) {
                 return itemText;
 
             });
-            console.log(items);
             return items;
         });
 
