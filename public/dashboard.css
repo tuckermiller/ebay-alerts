@@ -25,6 +25,7 @@ label {
 
 .content {
     font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
     background-color: white;
     padding: 20px;
     max-width: 920px;
@@ -42,7 +43,8 @@ label {
     flex: 1 1 auto;
 }
 
-input {
+input,
+option {
     border: 1px solid #DDD;
 }
 

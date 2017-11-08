@@ -5,43 +5,65 @@
         eBay Alerts
     </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="dashboard.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-    <span>Alerts Dashboard</span>
-    <div id="user-title"></div>
-    <div class="section">
-        <span class="section-title">Create alert</span>
-        <form id="create-alert-form">
-            <div>
-                <label for="keywords">Keywords:</label>
-                <input type="text" name="keywords">
+    <header>
+        <div class="header-content">
+            <div class="title">
+                <h1>
+                    eBay Alerts
+                </h1>
             </div>
-            <div>
-                <label for="frequency">Frequency:</label>
-                <select name="frequency">
+            <div class="description">
+                Create and customize alerts and automatically receive email notifications when your searches contain new items
+            </div>
+    </header>
+    </div>
+    <div class="content">
+        <div class="page-title">
+            <h2>Alerts Dashboard</h2>
+        </div>
+        <div id="user-title"></div>
+        <div class="section">
+            <h3>Create alert</h3>
+            <form id="create-alert-form">
+                <div>
+                    <label for="keywords">Keywords:</label>
+                    <input type="text" name="keywords">
+                </div>
+                <div>
+                    <label for="frequency">Frequency:</label>
+                    <select name="frequency">
                     <option value="1 week">1 week</option>
                     <option value="3 days">3 days</option>
                     <option value="1 day">1 day</option>
                     <option value="6 hours">6 hours</option>
                     <option value="3 hours">3 hours</option> 
                   </select>
-            </div>
-            <div>
-                <button type="submit">Go</button>
-            </div>
-        </form>
-    </div>
-    <div class="section">
-        <span class="section-title">
+                </div>
+                <div class="submit-button-container">
+                    <button class="button" type=" submit ">Create alert</button>
+                </div>
+            </form>
+        </div>
+        <div class="section ">
+            <span class="section-title ">
             My alerts
         </span>
-        <div id="alerts-container">
-            <ul id="my-alerts">
-            </ul>
+            <div id="alerts-container ">
+                <ul id="my-alerts ">
+                </ul>
+            </div>
         </div>
     </div>
-    <script src="dashboard.js"></script>
+    <footer>
+        <p>Created by: <a href="https://github.com/tuckermiller ">Tucker Miller</a></p>
+    </footer>
+    <script src="dashboard.js "></script>
 </body>
 
 </html>
