@@ -5,24 +5,63 @@
         eBay Alerts
     </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="index.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-    <span>Log in:</span>
-    <form id="login-form">
-        <div>
-            <label for="email">Email:</label>
-            <input type="text" name="email">
+    <header>
+        <div class="header-content">
+            <div class="title">
+                <h1>
+                    eBay Alerts
+                </h1>
+            </div>
+            <div class="description">
+                Create and customize alerts and automatically receive email notifications when your searches contain new items
+            </div>
+    </header>
+    </div>
+    <div class="content">
+        <div class="form-area">
+            <div class="form-container">
+                <h2>Log in:</h2>
+                <form id="login-form">
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="text" name="email">
+                    </div>
+                    <div>
+                        <label for="password">Password:</label>
+                        <input type="text" name="password">
+                    </div>
+                    <div>
+                        <button class="button" type="submit">Go</button>
+                    </div>
+                </form>
+            </div>
+            <div class="form-container">
+                <h2>Register:</h2>
+                <form id="registration-form">
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="text" name="email">
+                    </div>
+                    <div>
+                        <label for="password">Password:</label>
+                        <input type="password" name="password">
+                    </div>
+                    <div>
+                        <button type="submit">Go</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="text" name="password">
-        </div>
-        <div>
-            <button type="submit">Go</button>
-        </div>
-    </form>
-    <a href="register">Register</a>
+    </div>
+    <footer>
+        <p>Created by: <a href="https://github.com/tuckermiller">Tucker Miller</a></p>
+    </footer>
     <script src="index.js"></script>
 </body>
 

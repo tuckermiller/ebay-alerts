@@ -41,10 +41,6 @@ app.get('/', function(req, res) {
     }
 })
 
-app.get('/register', function(req, res) {
-    res.sendFile(__dirname + '/public/register.html')
-})
-
 app.get('/dashboard', function(req, res) {
     res.sendFile(__dirname + '/public/dashboard.html')
 })
