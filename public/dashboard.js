@@ -5,8 +5,7 @@ $(document).ready(function() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function(data) {
-            console.log(data);
-            // To do: map data to alert components
+            renderAlerts(data);
         },
         failure: function(errMsg) {
             alert(errMsg);
@@ -26,6 +25,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(data) {
                 // To do: replace with visual indication of success
+                // To do: on success, clear form
                 console.log('Success')
             },
             failure: function(errMsg) {
@@ -35,6 +35,10 @@ $(document).ready(function() {
     });
 })
 
-function renderAlert(alert) {
-
-};
+function renderAlerts(alerts) {
+    alerts.map((alert) => {
+        $("my-alerts").append(
+            "<li><span>" + alert.keywords + "</span><span>" + alert.frequency + "</span></li>"
+        );
+    })
+}
